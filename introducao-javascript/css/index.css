@@ -136,3 +136,13 @@ button[disabled=disabled], button:disabled {
 .acima-peso{
 	background-color: red;
 }
+
+#filtro-paciente{
+	width: 200px;
+	height: 30px;
+	margin-bottom: 10px;
+}
+
+.invisivel{
+	display: none;
+}
