@@ -9,9 +9,12 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="center">Alura Typer</h1>
+        <h1 class="center">Corrida Typer</h1>
         <p class="frase center">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
+        <div class="center">
+            <p id="erro">Ocorreu um erro. Tente novamente.</p>
+            <img id="spinner" src="img/spinner.gif" alt="spinner"></img>
+        </div>
         <ul class="informacoes center">
             <li>
                 <i class="small material-icons icones">description</i>
@@ -28,6 +31,19 @@
         <div class="botoes">
             <a id="botao-reiniciar" class="btn-floating btn-large waves-effect waves-light red">
                 <i class="material-icons">restore</i>
+            </a>
+            <a id="botao-placar" class="btn-floating btn-large waves-effect waves-light green">
+                <i class="material-icons">assignment</i>
+            </a>
+            <a id="botao-frase" class="btn-floating btn-large waves-effect waves-light blue">
+                <i class="material-icons">shuffle</i>
+            </a>
+            <a id="botao-frase-id" class="btn-floating btn-large waves-effect waves-light cyan">
+                <i class="material-icons">repeat_one</i>
+            </a>
+            <input type="number" id="frase-id" min="0">
+            <a id="botao-sync" class="btn-floating btn-large waves-effect waves-light brown">
+                <i class="material-icons">swap_vert</i>
             </a>
         </div>
 
@@ -56,6 +72,6 @@
     <script src="js/jquery.js"></script>
     <script src="js/main.js"></script>
     <script src="js/placar.js"></script>
-
+    <script src="js/frase.js"></script>
 </body>
 </html>

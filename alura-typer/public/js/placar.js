@@ -1,3 +1,14 @@
+$("#botao-placar").click(mostraplacar);
+$("#botao-sync").click(sincronizaPlacar);
+
+function sincronizaPlacar(){
+    console.log("HUE")
+}
+
+function mostraplacar(){
+    $(".placar").stop().slideToggle(600);
+}
+
 function inserePlacar() {
     var corpoTabela = $(".placar").find("tbody");
     var usuario = "Douglas"
@@ -7,6 +18,16 @@ function inserePlacar() {
     linha.find(".botao-remover").click(removeLinha);
 
     corpoTabela.append(linha);
+    $(".placar").slideDown(500);
+    scrollPlacar();
+}
+
+function scrollPlacar(){
+    var posicaoPlacar = $(".placar").offset().top;
+    $("body").animate(
+    {
+        scrollTop: posicaoPlacar + "px"
+    }, 1000);
 }
 
 function novaLinha(usuario, palavras) {
@@ -31,5 +52,10 @@ function novaLinha(usuario, palavras) {
 
 function removeLinha() {
     event.preventDefault();
-    $(this).parent().parent().remove();
+    var linha = $(this).parent().parent();
+    linha.fadeOut(1000);
+    setTimeOut(function(){
+        linha.remove()
+    }, 1000);
+
 }
