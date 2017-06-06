@@ -6,7 +6,16 @@ $(function() {
     inicializaContadores();
     inicializaCronometro();
     inicializaMarcadores();
+    atualizaPlacar();
     $("#botao-reiniciar").click(reiniciaJogo);
+    $('#usuarios').selectize({
+        create: true,
+        sortField: 'text'
+    });
+    $('.tooltip').tooltipster({
+            trigger: "custom"
+        }
+    );
 });
 
 function atualizaTempoFrase(tempo){
