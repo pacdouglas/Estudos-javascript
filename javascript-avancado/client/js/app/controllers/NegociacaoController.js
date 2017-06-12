@@ -9,22 +9,22 @@ class NegociacaoController{
         this._listaNegociacoes = new Bind(new ListaNegociacoes(), 
                                             new NegociacoesView($("#negociacoesView"))
                                             , "adiciona","esvazia");
-
         this._mensagem = new Bind(new Mensagem(), new MensagemView($("#mensagemView")), "texto");
     }
 
     importaNegociacoes(){
         let service = new NegociacaoService();
-        service.obterNegociacoesDaSemana((err, negociacoes) => {
-            if(err){
-                this._mensagem.texto = err;
-                return;
-            }
-            negociacoes.forEach(negociacao => {
-                this._listaNegociacoes.adiciona(negociacao);
-                this._mensagem.texto = "Importação com sucesso";
-            });
-        });
+
+        Promise.all([service.obterNegociacoesDaSemana(), 
+                    service.obterNegociacoesDaSemanaAnterior(),
+                    service.obterNegociacoesDaSemanaRetrasada()])
+                .then(negociacoes => {
+                    console.log(negociacoes);
+                    negociacoes
+                    .reduce((arrayAchatado, array) => arrayAchatado.concat(array),[])
+                    .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                })
+                .catch(error => this._mensagem.texto = error);
     }
 
     adiciona(event){
