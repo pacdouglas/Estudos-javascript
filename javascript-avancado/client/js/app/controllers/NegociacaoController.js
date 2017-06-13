@@ -12,6 +12,7 @@ class NegociacaoController{
         this._mensagem = new Bind(new Mensagem(), new MensagemView($("#mensagemView")), "texto");
 
         this._ordemAtual = '';
+        
     }
 
     ordena(coluna) {
