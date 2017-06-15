@@ -1,63 +1,93 @@
-class NegociacaoDao{
-    constructor(connection){
+import {Negociacao} from '../models/Negociacao';
+
+export class NegociacaoDao {
+
+    constructor(connection) {
+
         this._connection = connection;
-        this._store = "negociacoes";
+        this._store = 'negociacoes';
     }
 
-    adiciona(negociacao){
+    adiciona(negociacao) {
+
         return new Promise((resolve, reject) => {
+            
             let request = this._connection
-                .transaction([this._store] , "readwrite")
+                .transaction([this._store], 'readwrite')
                 .objectStore(this._store)
                 .add(negociacao);
 
-            request.onsuccess = (e) => {
+            request.onsuccess = e => {
+
                 resolve();
             };
 
-            request.onerror = (e) => {
+            request.onerror = e => {
+
                 console.log(e.target.error);
-                reject("Não foi possivel adicionar");
-            }
+                reject('Não foi possível adicionar a negociação');
+
+            };
 
         });
     }
 
-    listaTodos(){
+    listaTodos() {
+
         return new Promise((resolve, reject) => {
+
             let cursor = this._connection
-                .transaction([this._store] , "readwrite")
-                .objectStore("negociacoes")
+                .transaction([this._store], 'readwrite')
+                .objectStore(this._store)
                 .openCursor();
 
             let negociacoes = [];
+
             cursor.onsuccess = e => {
+
                 let atual = e.target.result;
-                if(atual){
+
+                if(atual) {
+
                     let dado = atual.value;
+
                     negociacoes.push(new Negociacao(dado._data, dado._quantidade, dado._valor));
+
                     atual.continue();
-                }else{
-                    console.log(negociacoes);
+
+                } else {
+
                     resolve(negociacoes);
                 }
+
             };
+
             cursor.onerror = e => {
-                console.error(e.target.error);
-                reject("num vai da nao");
+
+                console.log(e.target.error);
+                reject('Não foi possível listar as negociações');
             };
-        })
+
+        });
     }
 
-    apagaTodos(){
+    apagaTodos() {
+
         return new Promise((resolve, reject) => {
+
             let request = this._connection
-                .transaction([this._store] , "readwrite")
-                .objectStore("negociacoes")
+                .transaction([this._store], 'readwrite')
+                .objectStore(this._store)
                 .clear();
-            
-            request.onsuccess = e => resolve("Apagou tudo");
-            request.onerror = e => reject("Num apagou tudo");
+
+            request.onsuccess = e => resolve('Negociações apagadas com sucesso');
+
+            request.onerror = e => {
+                console.log(e.target.error);
+                reject('Não foi possível apagar as negociações');
+            }; 
+
         });
+
     }
 }

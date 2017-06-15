@@ -1,3 +1,4 @@
+<!-- aluraframe/client/post.html -->
 <html>
 <head>
     <meta charset="UTF-8">
@@ -46,6 +47,7 @@
                 valor: inputValor.value
             };
 
+            // usando nosso serviço. Veja que nem guardei em uma variável 
             new HttpService()
                 .post('/negociacoes', negociacao)
                 .then(() => {
