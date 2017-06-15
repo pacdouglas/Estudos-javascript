@@ -67,5 +67,4 @@ export class HttpService {
             xhr.send(JSON.stringify(dado)); // usando JSON.stringifly para converter objeto em uma string no formato JSON.
         });
     }
-    }
 }
