@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InputCustomizado from "./componentes/InputCustomizado.js"
 import './css/pure-min.css';
 import './css/side-menu.css';
 import $ from 'jquery';
@@ -61,12 +62,12 @@ class App extends Component {
         </a>
         <div id="menu">
           <div className="pure-menu">
-            <a className="pure-menu-heading" href="#">Company</a>
+            <a className="pure-menu-heading" href=".">Company</a>
 
             <ul className="pure-menu-list">
-              <li className="pure-menu-item"><a href="#" className="pure-menu-link">Home</a></li>
-              <li className="pure-menu-item"><a href="#" className="pure-menu-link">Autor</a></li>
-              <li className="pure-menu-item"><a href="#" className="pure-menu-link">Livro</a></li>
+              <li className="pure-menu-item"><a href="." className="pure-menu-link">Home</a></li>
+              <li className="pure-menu-item"><a href="." className="pure-menu-link">Autor</a></li>
+              <li className="pure-menu-item"><a href="." className="pure-menu-link">Livro</a></li>
             </ul>
           </div>
         </div>
@@ -77,18 +78,10 @@ class App extends Component {
           <div className="content" id="content">
             <div className="pure-form pure-form-aligned">
               <form className="pure-form pure-form-aligned" onSubmit={this.enviaForm} method="post">
-                <div className="pure-control-group">
-                  <label htmlFor="nome">Nome</label>
-                  <input id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome}/>
-                </div>
-                <div className="pure-control-group">
-                  <label htmlFor="email">Email</label>
-                  <input id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail}/>
-                </div>
-                <div className="pure-control-group">
-                  <label htmlFor="senha">Senha</label>
-                  <input id="senha" type="password" name="senha" value={this.state.senha} onChange={this.setSenha}/>
-                </div>
+                <InputCustomizado id="nome" label="Nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome}/>
+                <InputCustomizado id="email" label="Email" type="email" name="email" value={this.state.email} onChange={this.setEmail}/>
+                <InputCustomizado id="senha" label="Senha" type="password" name="senha" value={this.state.senha} onChange={this.setSenha}/>
+                
                 <div className="pure-control-group">
                   <label></label>
                   <button type="submit" className="pure-button pure-button-primary">Gravar</button>
