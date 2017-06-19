@@ -44,19 +44,19 @@ class FormularioAutor extends Component {
             success: (resposta) => {
                 console.log("Enviou");
                 //this.props.callbackAtualizaListagem(resposta); Disparar broadcast
-                this.setState({nome: '', email: '', senha: '' });
-                PubSub.publish("atualiza-lista-autores",resposta);
+                this.setState({ nome: '', email: '', senha: '' });
+                PubSub.publish("atualiza-lista-autores", resposta);
 
             },
             error: (erro) => {
                 console.log("Erro no envio");
-                if(erro.status === 400){
+                if (erro.status === 400) {
                     new TratadorErros().publicaErros(erro.responseJSON);
                 }
             },
             beforeSend: () => {
-                PubSub.publish("limpa-erros",{});
-            } 
+                PubSub.publish("limpa-erros", {});
+            }
         });
     }
 
@@ -101,10 +101,10 @@ class TabelaAutores extends Component {
     }
 }
 
-export default class AutorBox extends Component{
+export default class AutorBox extends Component {
     constructor() {
         super();
-        this.state = {lista: []};
+        this.state = { lista: [] };
     }
     componentDidMount() {
         $.ajax({
@@ -116,14 +116,19 @@ export default class AutorBox extends Component{
         });
 
         PubSub.subscribe("atualiza-lista-autores", (topico, objeto) => {
-            this.setState({lista: objeto.reverse()});
+            this.setState({ lista: objeto.reverse() });
         });
     }
     render() {
         return (
             <div>
-                <FormularioAutor/>
-                <TabelaAutores lista={this.state.lista} />
+                <div className="header">
+                    <h1>Cadastro de Autores</h1>
+                </div>
+                <div className="content" id="content">
+                    <FormularioAutor />
+                    <TabelaAutores lista={this.state.lista} />
+                </div>
             </div>
         );
     }
