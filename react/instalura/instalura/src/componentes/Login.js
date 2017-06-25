@@ -17,6 +17,7 @@ export default class Login extends Component {
         };
         fetch("http://localhost:8080/api/public/login", requestInfo)
             .then(response => {
+                console.log(response);
                 if (response.ok) {
                     return response.text();
                 } else {
@@ -25,7 +26,7 @@ export default class Login extends Component {
             })
             .then(token => {
                 localStorage.setItem("auth-token", token);
-                browserHistory.push("timeline");
+                browserHistory.push("/timeline");
             })
             .catch(error => this.setState({ msg: error.message }));
     }
