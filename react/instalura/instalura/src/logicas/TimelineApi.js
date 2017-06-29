@@ -1,4 +1,4 @@
-import { listagem, comenta, like, notifica } from "../actions/actionCreator";
+import { listagem, comentario, like, notifica } from "../actions/actionCreator";
 
 export default class TimelineApi {
 
@@ -32,7 +32,7 @@ export default class TimelineApi {
           }
         })
         .then(novoComentario => {
-          dispatch(comenta(fotoId, novoComentario));
+          dispatch(comentario(fotoId, novoComentario));
           return novoComentario;
         });
     }
