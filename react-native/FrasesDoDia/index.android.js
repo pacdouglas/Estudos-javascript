@@ -1,47 +1,60 @@
 import React, { Component } from 'react';
+
 import {
   AppRegistry,
   StyleSheet,
+  Image,
+  View,
+  TouchableOpacity,
   Text,
-  View
+  Alert
 } from 'react-native';
 
 export default class FrasesDoDia extends Component {
+  gerarFrase() {
+    const numAleatorio = Math.floor(Math.random() * 5);
+
+    let frases = [];
+    frases[0] = 'aa';
+    frases[1] = 'bb';
+    frases[2] = 'cc';
+    frases[3] = 'dd';
+    frases[4] = 'ee';
+
+    Alert.alert("Frase Gerada", frases[numAleatorio]);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+      <View style={styles.principal}>
+        <Image source={require('./imgs/logo.png')} />
+        <TouchableOpacity
+          onPress={this.gerarFrase}
+          style={styles.botao}>
+          <Text style={styles.textoBotao}>Nova Frase</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  principal: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center"
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  botao: {
+    backgroundColor: "#538530",
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    marginTop: 20
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  textoBotao: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "bold"
+  }
 });
 
 AppRegistry.registerComponent('FrasesDoDia', () => FrasesDoDia);
