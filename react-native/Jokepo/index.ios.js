@@ -7,6 +7,8 @@ import {
   Button,
   Image
 } from 'react-native';
+import Topo from "./src/components/Topo"
+import Icone from "./src/components/Icone"
 
 export default class Jokepo extends Component {
   constructor(props) {
@@ -71,42 +73,6 @@ export default class Jokepo extends Component {
   }
 }
 
-class Icone extends Component {
-  render() {
-    let imageFun = require(`./imgs/pedra.png`);
-    switch (this.props.escolha) {
-      case "Pedra": imageFun = require(`./imgs/pedra.png`); break;
-      case "Papel": imageFun = require(`./imgs/papel.png`); break;
-      case "Tesoura": imageFun = require(`./imgs/tesoura.png`); break;
-    }
-
-    if (this.props.escolha === "") {
-      return (
-        <View style={styles.icone}>
-        </View>
-      );
-    } else {
-      return (
-        <View style={styles.icone}>
-          <Text style={styles.txtJogador}>{this.props.jogador}</Text>
-          <Image source={imageFun} />
-        </View>
-      );
-    }
-  }
-}
-
-
-class Topo extends Component {
-  render() {
-    return (
-      <View>
-        <Image source={require("./imgs/jokenpo.png")} />
-      </View>
-    );
-  }
-}
-
 const styles = StyleSheet.create({
   btnEscolha: {
     width: 90
@@ -125,13 +91,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "red",
     height: 60
-  },
-  txtJogador: {
-    fontSize: 20
-  },
-  icone: {
-    alignItems: "center",
-    marginBottom: 20
   }
 });
 
